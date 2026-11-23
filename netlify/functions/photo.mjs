@@ -1,0 +1,3 @@
+import {getStore} from '@netlify/blobs';
+const types={jpg:'image/jpeg',png:'image/png',webp:'image/webp',gif:'image/gif'};
+export default async function handler(req){if(req.method!=='GET')return new Response('Method Not Allowed',{status:405});const key=new URL(req.url).searchParams.get('key')||'';const ext=key.split('.').pop();if(!/^photos\/[0-9a-f-]{36}\.(jpg|png|webp|gif)$/.test(key))return new Response('Bad Request',{status:400});const data=await getStore('heungseon-treasure-reviews').get(key,{type:'arrayBuffer'});if(!data)return new Response('Not Found',{status:404});return new Response(data,{headers:{'Content-Type':types[ext],'Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'}})}

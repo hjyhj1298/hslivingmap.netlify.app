@@ -1,0 +1,335 @@
+
+@font-face {
+  font-family: "GyeonggiTitle";
+  src: url("./fonts/GyeonggiTitle-Light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GyeonggiTitle";
+  src: url("./fonts/GyeonggiTitleV-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+}
+:root {
+  font-family: "GyeonggiTitle", "Pretendard", "Noto Sans KR", system-ui,
+    sans-serif;
+  font-weight: 300;
+  color: #244f4c;
+  background: #e9f8f2;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #fafffd, #dff4ec);
+}
+h1,
+h2,
+h3,
+.eyebrow {
+  font-family: "GyeonggiTitle", "Pretendard", "Noto Sans KR", system-ui,
+    sans-serif;
+  font-weight: 700;
+}
+header {
+  max-width: 1180px;
+  margin: auto;
+  padding: 28px 28px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin: 0.1rem 0;
+  color: #285f5a;
+  letter-spacing: -0.06em;
+}
+header p {
+  margin: 0.25rem 0;
+  color: #567b76;
+}
+.eyebrow {
+  font-weight: 800;
+  color: #eb7163;
+}
+.clover {
+  font-size: 4rem;
+}
+nav {
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  padding: 10px 28px 18px;
+  max-width: 1180px;
+  margin: auto;
+}
+button {
+  font: inherit;
+}
+nav button {
+  white-space: nowrap;
+  border: 1px solid #cbe6dc;
+  background: #fff;
+  color: #466e69;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+nav button.active {
+  background: #2f7069;
+  color: white;
+}
+.mapWrap {
+  max-width: 1180px;
+  margin: auto;
+  border: 10px solid white;
+  border-radius: 30px;
+  overflow: auto;
+  box-shadow: 0 20px 60px #2c6c5c22;
+}
+.canvas {
+  position: relative;
+  min-width: 900px;
+}
+.canvas > img {
+  display: block;
+  width: 100%;
+}
+.markers {
+  position: absolute;
+  inset: 0;
+}
+.marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border: 4px solid white;
+  border-radius: 50% 50% 50% 10%;
+  rotate: -45deg;
+  box-shadow: 0 8px 18px #245b5044;
+  cursor: pointer;
+}
+.marker span {
+  display: block;
+  rotate: 45deg;
+  font-size: 20px;
+}
+.legend {
+  max-width: 1180px;
+  margin: 14px auto 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0 28px;
+}
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+}
+.legend b {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: #173d3a88;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+}
+.sheet {
+  width: min(520px, 100%);
+  height: 100%;
+  overflow: auto;
+  background: #fbfffd;
+  padding: 28px;
+  position: relative;
+}
+.close {
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  border: 0;
+  background: transparent;
+  font-size: 2rem;
+}
+.spotHead {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.spotHead > span {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+}
+.spotHead h2 {
+  margin: 3px 0;
+}
+.sheet blockquote,
+.empty {
+  margin: 8px 0;
+  background: #edf8f3;
+  padding: 14px;
+  border-radius: 12px;
+}
+.sheet blockquote,
+.review p,
+.empty,
+input,
+textarea,
+.privacy {
+  font-family: "GyeonggiTitle", "Pretendard", "Noto Sans KR", system-ui,
+    sans-serif;
+  font-weight: 300;
+}
+.review {
+  background: white;
+  border: 1px solid #dbece5;
+  border-radius: 16px;
+  padding: 14px;
+  margin: 10px 0;
+}
+.reviewFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 9px;
+}
+.reviewFoot span {
+  display: flex;
+  gap: 6px;
+}
+.reviewFoot button,
+.editActions button {
+  border: 1px solid #bfd8cf;
+  background: #f2faf6;
+  color: #466e69;
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.reviewFoot .delete {
+  color: #c65448;
+  background: #fff3f0;
+  border-color: #f0c4bd;
+}
+.photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+.photos img {
+  width: 100%;
+  aspect-ratio: 1.2;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.primary {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  background: #2f7069;
+  color: white;
+  font-weight: 900;
+  padding: 14px;
+  margin-top: 14px;
+}
+form {
+  margin-top: 14px;
+  border-top: 1px dashed #bbd9ce;
+  padding-top: 16px;
+}
+.editForm {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+.editActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.editActions button[type="submit"] {
+  background: #2f7069;
+  color: white;
+}
+label {
+  display: block;
+  font-weight: 800;
+  margin: 12px 0;
+}
+label small {
+  display: block;
+  margin-top: 5px;
+  color: #718a86;
+  font-weight: 300;
+}
+input,
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid #bcd8cf;
+  border-radius: 12px;
+  padding: 12px;
+  background: white;
+  font: inherit;
+}
+textarea {
+  min-height: 100px;
+}
+.status {
+  color: #e26759;
+  font-weight: 800;
+}
+.privacy {
+  font-size: 0.85rem;
+  color: #718a86;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  header {
+    padding: 20px 18px 8px;
+  }
+  .clover {
+    font-size: 2.5rem;
+  }
+  nav {
+    padding: 8px 18px 14px;
+  }
+  .mapWrap {
+    border-width: 5px;
+    border-radius: 18px;
+    margin: 0 8px;
+    height: 64vh;
+  }
+  .sheet {
+    padding: 22px;
+  }
+  .legend {
+    padding: 0 18px;
+  }
+}
+
+/* Administrator access: unchanged public map styling */
+.adminBar{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin:0 0 8px;font-size:12px;color:#536958}
+.adminBar button,.adminLogin button{border:1px solid #bacabb;border-radius:10px;background:#f5f8ef;padding:7px 12px;color:#466651;cursor:pointer}
+.adminLogin{max-width:360px;margin:8px 0 12px auto;background:#fffdf6;border:1px solid #d9e2d5;padding:16px;border-radius:15px}
+.adminLogin label{display:block;font-size:13px}
+.adminLogin input{display:block;width:100%;margin:8px 0 12px;padding:10px;border-radius:9px;border:1px solid #cbd8ca}
+
+.adminBar{display:flex;justify-content:flex-end;align-items:center;gap:12px;padding:4px 28px;max-width:1180px;margin:auto;font-size:13px;color:#536958}.adminBar button,.adminLogin button{border:1px solid #bacabb;border-radius:10px;background:#f5f8ef;padding:8px 14px;color:#466651;cursor:pointer}.adminLogin{max-width:360px;margin:8px 24px 12px auto;background:#fffdf6;border:1px solid #d9e2d5;padding:16px;border-radius:15px}.adminLogin input{display:block;width:100%;margin:8px 0 12px;padding:10px;border-radius:9px;border:1px solid #cbd8ca}.adminLogin label{display:block}.adminLogin button{margin-top:6px}.status:empty{display:none}.reviewFoot button,.editActions button{cursor:pointer}.primary:disabled{opacity:.55;cursor:wait}.review .photos img{max-height:180px;object-fit:cover}.tip{font-size:12px;color:#6b8278}.alert{color:#ab463c}.backdrop[hidden],.adminLogin[hidden],#editor[hidden],#writer[hidden]{display:none!important}

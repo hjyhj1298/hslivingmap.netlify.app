@@ -1,0 +1,51 @@
+흥선 리빙맵 프로젝트 — Netlify 통합 배포용
+
+이 프로젝트는 기존 통합 홈페이지의 HTML/CSS와 안심지도·변화기록 연결을 보존하고,
+기존에 외부 사이트로 이동하던 보물지도를 /treasure/ 경로에 직접 포함했습니다.
+기존 보물지도 일러스트 지도, 16개 장소 및 장소별 주민 의견을 보존했습니다.
+보물지도에서 후기 등록·사진 첨부·주민 비밀번호 기반 수정/삭제·관리자 로그인과 전체 후기 수정/삭제가 가능합니다.
+후기와 사진은 Netlify Blobs에 저장됩니다. (다시 배포해도 같은 사이트 내에서 유지)
+
+중요: 서버 기능이 포함되므로 이 ZIP을 기존처럼 Netlify에 드래그만 하면 후기 저장 기능까지
+반영된다고 보장할 수 없습니다. GitHub 저장소 연결 방식 또는 Netlify CLI 배포가 필요합니다.
+
+[권장 배포: GitHub 연동]
+1. 이 ZIP 압축을 풉니다.
+2. 압축을 푼 폴더의 모든 파일과 폴더를 GitHub의 비공개 저장소에 업로드합니다.
+   최상위에 netlify.toml, package.json, public/, netlify/ 폴더가 있어야 합니다.
+3. Netlify 로그인 → 기존 hsdlivingmap 사이트 선택.
+4. Project configuration 또는 Site configuration → Environment variables에서
+   ADMIN_REVIEW_PASSWORD라는 환경변수를 만들고 요청한 관리자 비밀번호를 입력합니다.
+   (빌드/Functions 런타임에서 사용할 수 있도록 설정. 코드나 GitHub에 쓰지 않습니다.)
+5. 기존 사이트가 수동 배포라면 Netlify의 기존 사이트를 Git 저장소에 연결하는 메뉴를 이용하거나
+   아래 CLI 방식으로 동일한 사이트에 배포합니다. 새로운 사이트를 만들면 URL이 달라집니다.
+6. Netlify 빌드 설정: Publish directory = public, Functions directory = netlify/functions.
+   netlify.toml에 미리 설정되어 있으므로 별도 빌드 명령은 필요하지 않습니다.
+7. 배포 후 https://hsdlivingmap.netlify.app/treasure/ 로 접속하여
+   (a) 장소 선택 (b) 후기 등록 (c) 수정/삭제 (d) 관리자 로그인을 시험합니다.
+
+[대안 배포: Netlify CLI, 로컬 PC에 Node.js/Netlify 계정 필요]
+1. ZIP 압축 해제 후 터미널에서 해당 폴더로 이동
+2. npm install
+3. npx netlify login
+4. npx netlify link (기존 hsdlivingmap 사이트와 연결)
+5. Netlify 사이트 설정에 ADMIN_REVIEW_PASSWORD 환경변수 설정
+6. npx netlify deploy --prod --dir=public --functions=netlify/functions
+   CLI가 함수 종속성을 번들링해 배포합니다.
+
+[운영 주의]
+- 관리자 비밀번호는 파일에 포함되지 않으며, 서버 환경변수로만 검증합니다.
+- 변경 전 Netlify의 이전 배포로 롤백 가능하지만, 새 후기·사진 데이터는 Blob 저장소에 유지됩니다.
+- 장소별 '주민들이 남긴 이야기'는 원본의 고정된 안내 문구이며 수정/삭제 대상은 '다녀온 사람들의 후기'입니다.
+- 사진 장당 3MB 이하, 최대 2장(JPEG/PNG/WEBP/GIF)으로 제한했습니다.
+- 위치 허용을 요구하는 기존 사용 흐름은 유지했으나 실제 반경 내 방문을 검증하는 기능은 아닙니다.
+- 게시물 신고, 자동 스팸차단, 업로드 악성콘텐츠 검사는 별도로 마련되지 않았습니다.
+- 비밀번호는 작성 글마다 별도 salt로 해시 저장되지만, 간단한 비밀번호는 추측에 취약할 수 있습니다.
+- 실제 공개 전 악성 댓글 방지 및 운영정책을 검토하세요.
+
+[원본과 달라진 점]
+- 통합 홈페이지의 /treasure/ 페이지가 외부 사이트로 자동 이동하지 않고 직접 지도 화면을 제공합니다.
+- 기존 디자인을 유지한 정적 HTML/JavaScript 구현으로 변환해 Netlify Functions와 연동합니다.
+- 기존 사이트의 기타 페이지와 링크는 그대로 포함합니다.
+
+참고: 여기서는 Netlify 계정에 접근하지 않았으므로 실제 운영 사이트에 아직 배포하지 않았습니다.
